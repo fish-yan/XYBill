@@ -36,7 +36,7 @@ class AddBillViewController: UIViewController, UICollectionViewDataSource, UICol
         moenyTF.becomeFirstResponder()
         commitButtonAction(UIButton())
         NSNotificationCenter.defaultCenter().addObserver(self, selector:
-            ("changeFrame:"), name: UIKeyboardWillChangeFrameNotification, object: nil)
+            (#selector(AddBillViewController.changeFrame(_:))), name: UIKeyboardWillChangeFrameNotification, object: nil)
         // Do any additional setup after loading the view.
     }
     @IBAction func inAndOutButton(sender: UIButton) {
