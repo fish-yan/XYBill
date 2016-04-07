@@ -18,8 +18,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var model: Model!
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.navigationController?.navigationBar.translucent = false
-        // Do any additional setup after loading the view, typically from a nib.
+        DataHelper.shareDataHelper().creatModelList()
     }
 
     @IBAction func panAction(sender: UIPanGestureRecognizer) {

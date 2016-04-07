@@ -158,6 +158,9 @@ class AddBillViewController: UIViewController, UICollectionViewDataSource, UICol
         return true
     }
     
+    @IBAction func commiteItemAction(sender: UIBarButtonItem) {
+        self.performSegueWithIdentifier("back", sender: nil)
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

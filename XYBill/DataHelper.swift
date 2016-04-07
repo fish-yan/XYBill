@@ -9,9 +9,24 @@
 import UIKit
 
 class DataHelper: NSObject {
+    var XYBill: FMDatabase!
+    
+    class func shareDataHelper() -> DataHelper{
+        let dataHelper = DataHelper()
+        return dataHelper
+    }
+    //创建地址
+    func creatPath() -> String {
+        let path: String = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first!
+        return path.stringByAppendingString("/XYBill.sqilte")
+    }
+    
     //创建
     func creatModelList(){
-        
+        let path = creatPath()
+        XYBill = FMDatabase(path: path)
+        XYBill.open()
+        XYBill.executeUpdate(<#T##sql: String!##String!#>, withVAList: <#T##CVaListPointer#>)
     }
     //插入
     func indertModel(model: Model){
