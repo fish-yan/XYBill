@@ -14,13 +14,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var pan: UIPanGestureRecognizer!
     @IBOutlet weak var topMargin: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
+    var dataArray: NSMutableArray!
     var offsetY:CGFloat = 0
     var model: Model!
     override func viewDidLoad() {
         super.viewDidLoad()
-        DataHelper.shareDataHelper().creatModelList()
+        dataArray = NSMutableArray()
     }
-
+    
+    func readDataSource() {
+        dataArray = DataHelper.shareDataHelper().queryAllModel()
+    }
+    
     @IBAction func panAction(sender: UIPanGestureRecognizer) {
         
         if sender.state == .Changed {
@@ -49,16 +54,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Dispose of any resources that can be recreated.
     }
     @IBAction func unwindToViewController(sender: UIStoryboardSegue){
-        print(model.type,model.account,model.money,model.date)
+        dataArray = DataHelper.shareDataHelper().queryAllModel()
+        tableView.reloadData()
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return dataArray.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
+        let model = dataArray[indexPath.row] as! Model
+        cell.textLabel?.text = "\(model.inAndOut)   \(model.date)   \(model.type)   \(model.money)"
         return cell
     }
     

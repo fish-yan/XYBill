@@ -27,11 +27,16 @@ class AddBillViewController: UIViewController, UICollectionViewDataSource, UICol
     var accountStr: String!
     var money: CGFloat!
     var currentDate: String!
-    var type: String!
+    var type: String = ""
+    var userInfo: NSUserDefaults!
+    var dataArray:NSMutableArray!
     override func viewDidLoad() {
         super.viewDidLoad()
         pickerArray = ["现金","支付宝","银行卡"]
         accountStr = "现金"
+        userInfo = NSUserDefaults.standardUserDefaults()
+        dataArray = userInfo.objectForKey("userInfo")?.mutableCopy() as! NSMutableArray
+        
         moenyTF.delegate = self
         moenyTF.becomeFirstResponder()
         commitButtonAction(UIButton())
@@ -39,6 +44,7 @@ class AddBillViewController: UIViewController, UICollectionViewDataSource, UICol
             (#selector(AddBillViewController.changeFrame(_:))), name: UIKeyboardWillChangeFrameNotification, object: nil)
         // Do any additional setup after loading the view.
     }
+    
     @IBAction func inAndOutButton(sender: UIButton) {
         if sender.titleLabel!.text == "收入" {
             sender.setTitle("支出", forState: .Normal)
@@ -133,10 +139,18 @@ class AddBillViewController: UIViewController, UICollectionViewDataSource, UICol
         return 1
     }
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10;
+        return dataArray.count;
     }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BillTypeCell", forIndexPath: indexPath) as! BillTypeCell
+        cell.title.text = dataArray[indexPath.row] as? String
+        if indexPath.row == dataArray.count - 1 {
+            var currentIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+            if (userInfo.integerForKey("indexPath") != 0) {
+                currentIndexPath = NSIndexPath(forRow: userInfo.integerForKey("indexPath") , inSection: 0)
+            }
+            self.collectionView(collectionView, didSelectItemAtIndexPath: currentIndexPath)
+        }
         return cell
     }
     //MARK: - UICollectionViewDelegate
@@ -149,8 +163,10 @@ class AddBillViewController: UIViewController, UICollectionViewDataSource, UICol
         cellView.frame = cell.frame
         cellView.title.text = cell.title.text
         self.collectionView.addSubview(cellView)
-        type = cell.title.text
+        type = cell.title.text!
+        userInfo.setInteger(indexPath.row, forKey: "indexPath")
     }
+    
     //MARK: - UITextFieldDelegate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
@@ -165,14 +181,25 @@ class AddBillViewController: UIViewController, UICollectionViewDataSource, UICol
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let VC = segue.destinationViewController as! ViewController
+        
+//        let array = DataHelper.shareDataHelper().queryAllModel()
+//        var i:NSInteger
+//        if array.count == 0 {
+//            i = 0
+//        }else{
+//            let mod = array.lastObject as! Model
+//            i = NSInteger(mod.id)!
+//            i += 1
+//        }
+        
         let model = Model()
-        model.account = accountButton.titleLabel?.text
+        model.id = "1"
+        model.account = (accountButton.titleLabel?.text)! 
         model.type = type
-        model.money = CGFloat((moenyTF.text! as NSString).floatValue)
-        model.date = timeButton.titleLabel?.text
-        model.inAndOut = inAndOutButton.titleLabel?.text
-        VC.model = model
+        model.money = moenyTF.text!
+        model.date = (timeButton.titleLabel?.text)! 
+        model.inAndOut = (inAndOutButton.titleLabel?.text)! 
+        DataHelper.shareDataHelper().insertModel(model)
     }
     
 

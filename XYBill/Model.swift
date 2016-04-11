@@ -9,8 +9,9 @@
 import UIKit
 
 class Model: NSObject {
+    var id: String!
     var account: String!
-    var money: CGFloat!
+    var money: String!
     var date: String!
     var type: String!
     var inAndOut: String!
