@@ -27,7 +27,7 @@ class DataHelper: NSObject {
         XYBill = FMDatabase(path: path)
         XYBill.open()
         do{
-           try XYBill.executeUpdate("create table if not exists XYBill(number integer primary key autoincrement, id text, account text, money text, date text, type text, inAndOut text)", values: nil)
+           try XYBill.executeUpdate("create table if not exists Bill(number integer primary key autoincrement, id text, account text, money text, date text, type text, inAndOut text)", values: nil)
         }catch let error as NSError {
             print(error.description)
         }
@@ -36,9 +36,10 @@ class DataHelper: NSObject {
     }
     //插入
     func insertModel(model: Model){
+        creatModelList()
         do{
             print(model.id, model.account, model.money, model.date, model.type, model.inAndOut)
-            try XYBill.executeUpdate("insert into XYBill(id)value(?)", values: [model.id])
+            try XYBill.executeUpdate("insert into Bill (id, account, money, date, type, inAndOut) values (?, ?, ?, ?, ?, ?)", values: [model.id, model.account, model.money, model.date, model.type, model.inAndOut])
         }catch let error as NSError{
             print(error.description)
         }
@@ -48,16 +49,17 @@ class DataHelper: NSObject {
     //删除
     func deleteModel(model: Model){
         do{
-            try XYBill.executeUpdate("delete from XYBill where id = ?", values: [model.id])
+            try XYBill.executeUpdate("delete from Bill where id = ?", values: [model.id])
         }catch let error as NSError {
             print(error.description)
         }
     }
     //查询
     func queryAllModel() -> NSMutableArray{
+        creatModelList()
         let array = NSMutableArray()
         do{
-            let set: FMResultSet = try XYBill.executeQuery("select * from XYBill", values: nil)
+            let set: FMResultSet = try XYBill.executeQuery("select * from Bill", values: nil)
             
             while set.next() {
                 let model = Model()

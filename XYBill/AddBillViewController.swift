@@ -144,13 +144,6 @@ class AddBillViewController: UIViewController, UICollectionViewDataSource, UICol
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BillTypeCell", forIndexPath: indexPath) as! BillTypeCell
         cell.title.text = dataArray[indexPath.row] as? String
-        if indexPath.row == dataArray.count - 1 {
-            var currentIndexPath = NSIndexPath(forRow: 0, inSection: 0)
-            if (userInfo.integerForKey("indexPath") != 0) {
-                currentIndexPath = NSIndexPath(forRow: userInfo.integerForKey("indexPath") , inSection: 0)
-            }
-            self.collectionView(collectionView, didSelectItemAtIndexPath: currentIndexPath)
-        }
         return cell
     }
     //MARK: - UICollectionViewDelegate
@@ -182,18 +175,18 @@ class AddBillViewController: UIViewController, UICollectionViewDataSource, UICol
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-//        let array = DataHelper.shareDataHelper().queryAllModel()
-//        var i:NSInteger
-//        if array.count == 0 {
-//            i = 0
-//        }else{
-//            let mod = array.lastObject as! Model
-//            i = NSInteger(mod.id)!
-//            i += 1
-//        }
+        let array = DataHelper.shareDataHelper().queryAllModel()
+        var i:NSInteger
+        if array.count == 0 {
+            i = 0
+        }else{
+            let mod = array.lastObject as! Model
+            i = NSInteger(mod.id)!
+            i += 1
+        }
         
         let model = Model()
-        model.id = "1"
+        model.id = "\(i)"
         model.account = (accountButton.titleLabel?.text)! 
         model.type = type
         model.money = moenyTF.text!

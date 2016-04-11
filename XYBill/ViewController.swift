@@ -20,6 +20,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         dataArray = NSMutableArray()
+        readDataSource()
     }
     
     func readDataSource() {
@@ -66,7 +67,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         let model = dataArray[indexPath.row] as! Model
-        cell.textLabel?.text = "\(model.inAndOut)   \(model.date)   \(model.type)   \(model.money)"
+        cell.textLabel?.text = "\(model.inAndOut)   \(model.date)   \(model.type)   \(model.money)   \(model.account)"
         return cell
     }
     
