@@ -8,17 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		930B9BC41C88134700123F0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930B9BC31C88134700123F0C /* AppDelegate.swift */; };
-		930B9BC61C88134700123F0C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930B9BC51C88134700123F0C /* ViewController.swift */; };
 		930B9BC91C88134700123F0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930B9BC71C88134700123F0C /* Main.storyboard */; };
 		930B9BCB1C88134700123F0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 930B9BCA1C88134700123F0C /* Assets.xcassets */; };
 		930B9BCE1C88134700123F0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930B9BCC1C88134700123F0C /* LaunchScreen.storyboard */; };
 		930B9BD91C88134800123F0C /* XYBillTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930B9BD81C88134800123F0C /* XYBillTests.swift */; };
 		930B9BE41C88134800123F0C /* XYBillUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930B9BE31C88134800123F0C /* XYBillUITests.swift */; };
-		930B9BF21C8832CA00123F0C /* AddBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930B9BF11C8832CA00123F0C /* AddBillViewController.swift */; };
-		930B9BF41C88336000123F0C /* BillTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930B9BF31C88336000123F0C /* BillTypeCell.swift */; };
-		930B9BF61C8837DB00123F0C /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930B9BF51C8837DB00123F0C /* Cell.swift */; };
-		930B9BF81C8837E600123F0C /* Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 930B9BF71C8837E600123F0C /* Cell.xib */; };
-		93FBE7C11C901D54002045EE /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FBE7C01C901D54002045EE /* Model.swift */; };
+		934110D21CBCCD8900154D28 /* AddBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934110C41CBCCD8900154D28 /* AddBillViewController.swift */; };
+		934110D31CBCCD8900154D28 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934110C51CBCCD8900154D28 /* ViewController.swift */; };
+		934110D41CBCCD8900154D28 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934110C71CBCCD8900154D28 /* Model.swift */; };
+		934110D51CBCCD8900154D28 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934110C91CBCCD8900154D28 /* DatePickerView.swift */; };
+		934110D61CBCCD8900154D28 /* DatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934110CA1CBCCD8900154D28 /* DatePickerView.xib */; };
+		934110D71CBCCD8900154D28 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934110CB1CBCCD8900154D28 /* PickerView.swift */; };
+		934110D81CBCCD8900154D28 /* PickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934110CC1CBCCD8900154D28 /* PickerView.xib */; };
+		934110D91CBCCD8900154D28 /* BillTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934110CE1CBCCD8900154D28 /* BillTypeCell.swift */; };
+		934110DA1CBCCD8900154D28 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934110CF1CBCCD8900154D28 /* Cell.swift */; };
+		934110DB1CBCCD8900154D28 /* Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934110D01CBCCD8900154D28 /* Cell.xib */; };
+		934110DC1CBCCD8900154D28 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934110D11CBCCD8900154D28 /* ListCell.swift */; };
 		93FBE7C31C90295E002045EE /* DataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FBE7C21C90295E002045EE /* DataHelper.swift */; };
 		A1D7FADF1E1E73D22FEE8C17 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7048A5426C06C3BF337ACF8F /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -45,7 +50,6 @@
 		7048A5426C06C3BF337ACF8F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		930B9BC01C88134700123F0C /* XYBill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XYBill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		930B9BC31C88134700123F0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		930B9BC51C88134700123F0C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		930B9BC81C88134700123F0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		930B9BCA1C88134700123F0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		930B9BCD1C88134700123F0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -56,11 +60,17 @@
 		930B9BDF1C88134800123F0C /* XYBillUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XYBillUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		930B9BE31C88134800123F0C /* XYBillUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XYBillUITests.swift; sourceTree = "<group>"; };
 		930B9BE51C88134800123F0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		930B9BF11C8832CA00123F0C /* AddBillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBillViewController.swift; sourceTree = "<group>"; };
-		930B9BF31C88336000123F0C /* BillTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillTypeCell.swift; sourceTree = "<group>"; };
-		930B9BF51C8837DB00123F0C /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
-		930B9BF71C8837E600123F0C /* Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell.xib; sourceTree = "<group>"; };
-		93FBE7C01C901D54002045EE /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		934110C41CBCCD8900154D28 /* AddBillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBillViewController.swift; sourceTree = "<group>"; };
+		934110C51CBCCD8900154D28 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		934110C71CBCCD8900154D28 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		934110C91CBCCD8900154D28 /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		934110CA1CBCCD8900154D28 /* DatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerView.xib; sourceTree = "<group>"; };
+		934110CB1CBCCD8900154D28 /* PickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		934110CC1CBCCD8900154D28 /* PickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerView.xib; sourceTree = "<group>"; };
+		934110CE1CBCCD8900154D28 /* BillTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillTypeCell.swift; sourceTree = "<group>"; };
+		934110CF1CBCCD8900154D28 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		934110D01CBCCD8900154D28 /* Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell.xib; sourceTree = "<group>"; };
+		934110D11CBCCD8900154D28 /* ListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		93FBE7C21C90295E002045EE /* DataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHelper.swift; sourceTree = "<group>"; };
 		93FBE7C41C902B4E002045EE /* XYheader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYheader.h; sourceTree = "<group>"; };
 		D87686D6A7CCE23E591235BE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -126,15 +136,13 @@
 		930B9BC21C88134700123F0C /* XYBill */ = {
 			isa = PBXGroup;
 			children = (
+				934110C31CBCCD8900154D28 /* Controller */,
+				934110C61CBCCD8900154D28 /* Model */,
+				934110C81CBCCD8900154D28 /* Public */,
+				934110CD1CBCCD8900154D28 /* View */,
 				930B9BC31C88134700123F0C /* AppDelegate.swift */,
 				93FBE7C41C902B4E002045EE /* XYheader.h */,
-				930B9BC51C88134700123F0C /* ViewController.swift */,
-				930B9BF11C8832CA00123F0C /* AddBillViewController.swift */,
 				93FBE7C21C90295E002045EE /* DataHelper.swift */,
-				93FBE7C01C901D54002045EE /* Model.swift */,
-				930B9BF51C8837DB00123F0C /* Cell.swift */,
-				930B9BF71C8837E600123F0C /* Cell.xib */,
-				930B9BF31C88336000123F0C /* BillTypeCell.swift */,
 				930B9BC71C88134700123F0C /* Main.storyboard */,
 				930B9BCA1C88134700123F0C /* Assets.xcassets */,
 				930B9BCC1C88134700123F0C /* LaunchScreen.storyboard */,
@@ -159,6 +167,45 @@
 				930B9BE51C88134800123F0C /* Info.plist */,
 			);
 			path = XYBillUITests;
+			sourceTree = "<group>";
+		};
+		934110C31CBCCD8900154D28 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				934110C51CBCCD8900154D28 /* ViewController.swift */,
+				934110C41CBCCD8900154D28 /* AddBillViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		934110C61CBCCD8900154D28 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				934110C71CBCCD8900154D28 /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		934110C81CBCCD8900154D28 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				934110C91CBCCD8900154D28 /* DatePickerView.swift */,
+				934110CA1CBCCD8900154D28 /* DatePickerView.xib */,
+				934110CB1CBCCD8900154D28 /* PickerView.swift */,
+				934110CC1CBCCD8900154D28 /* PickerView.xib */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		934110CD1CBCCD8900154D28 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				934110CE1CBCCD8900154D28 /* BillTypeCell.swift */,
+				934110CF1CBCCD8900154D28 /* Cell.swift */,
+				934110D01CBCCD8900154D28 /* Cell.xib */,
+				934110D11CBCCD8900154D28 /* ListCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		AEE94A5D64B7E0F12BE4A02E /* Frameworks */ = {
@@ -279,9 +326,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				934110D81CBCCD8900154D28 /* PickerView.xib in Resources */,
+				934110DB1CBCCD8900154D28 /* Cell.xib in Resources */,
 				930B9BCE1C88134700123F0C /* LaunchScreen.storyboard in Resources */,
-				930B9BF81C8837E600123F0C /* Cell.xib in Resources */,
 				930B9BCB1C88134700123F0C /* Assets.xcassets in Resources */,
+				934110D61CBCCD8900154D28 /* DatePickerView.xib in Resources */,
 				930B9BC91C88134700123F0C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -355,13 +404,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				930B9BC61C88134700123F0C /* ViewController.swift in Sources */,
+				934110D51CBCCD8900154D28 /* DatePickerView.swift in Sources */,
+				934110D41CBCCD8900154D28 /* Model.swift in Sources */,
+				934110D91CBCCD8900154D28 /* BillTypeCell.swift in Sources */,
+				934110DC1CBCCD8900154D28 /* ListCell.swift in Sources */,
 				930B9BC41C88134700123F0C /* AppDelegate.swift in Sources */,
-				930B9BF61C8837DB00123F0C /* Cell.swift in Sources */,
 				93FBE7C31C90295E002045EE /* DataHelper.swift in Sources */,
-				93FBE7C11C901D54002045EE /* Model.swift in Sources */,
-				930B9BF41C88336000123F0C /* BillTypeCell.swift in Sources */,
-				930B9BF21C8832CA00123F0C /* AddBillViewController.swift in Sources */,
+				934110DA1CBCCD8900154D28 /* Cell.swift in Sources */,
+				934110D31CBCCD8900154D28 /* ViewController.swift in Sources */,
+				934110D71CBCCD8900154D28 /* PickerView.swift in Sources */,
+				934110D21CBCCD8900154D28 /* AddBillViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

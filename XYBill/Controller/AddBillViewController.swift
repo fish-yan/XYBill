@@ -15,27 +15,41 @@ class AddBillViewController: UIViewController, UICollectionViewDataSource, UICol
     @IBOutlet weak var datePacker: UIDatePicker!
     @IBOutlet weak var accountButton: UIButton!
     @IBOutlet weak var timeButton: UIButton!
-    @IBOutlet weak var dataTopMargin: NSLayoutConstraint!
-    @IBOutlet weak var accountTopMargin: NSLayoutConstraint!
+    @IBOutlet weak var typeTF: UITextField!
+    @IBOutlet weak var maskView: UIView!
+    @IBOutlet weak var datePickerBottomMargin: NSLayoutConstraint!
+    @IBOutlet weak var PickerViewBottomMargin: NSLayoutConstraint!
     @IBOutlet weak var dataPickerView: UIView!
     @IBOutlet weak var accountPickerView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var bottomMargin: NSLayoutConstraint!
     @IBOutlet weak var moenyTF: UITextField!
+    @IBOutlet weak var alertTopMargin: NSLayoutConstraint!
+    var margin:CGFloat = -250
+    var alertMargin: CGFloat = 100
     var cellView: Cell!
     var pickerArray: [String]!
     var accountStr: String!
-    var money: CGFloat!
+    var money: CGFloat = 0
     var currentDate: String!
     var type: String = ""
     var userInfo: NSUserDefaults!
     var dataArray:NSMutableArray!
+    
+    override func viewDidAppear(animated: Bool) {
+        var indexPath:NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+        if userInfo.integerForKey("indexPath") != 0 {
+            indexPath = NSIndexPath(forRow: userInfo.integerForKey("indexPath"), inSection:0 )
+        }
+        collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         pickerArray = ["现金","支付宝","银行卡"]
         accountStr = "现金"
         userInfo = NSUserDefaults.standardUserDefaults()
-        dataArray = userInfo.objectForKey("userInfo")?.mutableCopy() as! NSMutableArray
+        readDataSource()
         
         moenyTF.delegate = self
         moenyTF.becomeFirstResponder()
@@ -43,6 +57,11 @@ class AddBillViewController: UIViewController, UICollectionViewDataSource, UICol
         NSNotificationCenter.defaultCenter().addObserver(self, selector:
             (#selector(AddBillViewController.changeFrame(_:))), name: UIKeyboardWillChangeFrameNotification, object: nil)
         // Do any additional setup after loading the view.
+    }
+    
+    func readDataSource() {
+        dataArray = userInfo.objectForKey("userInfo")?.mutableCopy() as! NSMutableArray
+        collectionView.reloadData()
     }
     
     @IBAction func inAndOutButton(sender: UIButton) {
@@ -59,22 +78,33 @@ class AddBillViewController: UIViewController, UICollectionViewDataSource, UICol
             self.view.layoutIfNeeded()
         }
     }
-
+    //添加新类型
+    @IBAction func cancleBtnAction(sender: UIButton) {
+        hiddenAlertView()
+    }
+    @IBAction func commitBtnAction(sender: UIButton) {
+        if typeTF.text != nil {
+            dataArray.addObject(typeTF.text!)
+            userInfo.setObject(dataArray, forKey: "userInfo")
+            readDataSource()
+        }
+        hiddenAlertView()
+    }
+    //Picker View
     @IBAction func dataPickerAction(sender: AnyObject) {
-        
         view.endEditing(true)
-        dataTopMargin.constant = 182
+        datePickerBottomMargin.constant = 0
         UIView.animateWithDuration(0.3) { () -> Void in
-            self.dataPickerView.alpha = 1
+            self.maskView.alpha = 0.5
             self.dataPickerView.layoutIfNeeded()
         }
     }
     
     @IBAction func accountPickerAction(sender: AnyObject) {
         view.endEditing(true)
-        accountTopMargin.constant = 182
+        PickerViewBottomMargin.constant = 0
         UIView.animateWithDuration(0.3) { () -> Void in
-            self.accountPickerView.alpha = 1
+            self.maskView.alpha = 0.5
             self.accountPickerView.layoutIfNeeded()
         }
     }
@@ -84,16 +114,14 @@ class AddBillViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         cancleButtonAction(UIButton())
+        hiddenAlertView()
     }
     
-    
-    
     @IBAction func cancleButtonAction(sender: AnyObject) {
-        dataTopMargin.constant = UIScreen.mainScreen().bounds.size.height
-        accountTopMargin.constant = UIScreen.mainScreen().bounds.size.height
+        datePickerBottomMargin.constant = margin
+        PickerViewBottomMargin.constant = margin
         UIView.animateWithDuration(0.3) { () -> Void in
-            self.dataPickerView.alpha = 0
-            self.accountPickerView.alpha = 0
+            self.maskView.alpha = 0
             self.dataPickerView.layoutIfNeeded()
             self.accountPickerView.layoutIfNeeded()
         }
@@ -139,30 +167,57 @@ class AddBillViewController: UIViewController, UICollectionViewDataSource, UICol
         return 1
     }
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataArray.count;
+        return dataArray.count + 1;
     }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BillTypeCell", forIndexPath: indexPath) as! BillTypeCell
-        cell.title.text = dataArray[indexPath.row] as? String
+        if indexPath.row == dataArray.count {
+            cell.title.text = "+"
+        }else{
+            cell.title.text = dataArray[indexPath.row] as? String
+        }
         return cell
     }
     //MARK: - UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if cellView != nil{
-            cellView.removeFromSuperview()
+        if indexPath.row == dataArray.count {
+            showAlertView()
+            return
+        }else{
+            if cellView != nil{
+                cellView.removeFromSuperview()
+            }
+            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! BillTypeCell
+            cellView = NSBundle.mainBundle().loadNibNamed("Cell", owner: self, options: nil).last as! Cell
+            cellView.frame = cell.frame
+            cellView.title.text = cell.title.text
+            self.collectionView.addSubview(cellView)
+            type = cell.title.text!
+            userInfo.setInteger(indexPath.row, forKey: "indexPath")
         }
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! BillTypeCell
-        cellView = NSBundle.mainBundle().loadNibNamed("Cell", owner: self, options: nil).last as! Cell
-        cellView.frame = cell.frame
-        cellView.title.text = cell.title.text
-        self.collectionView.addSubview(cellView)
-        type = cell.title.text!
-        userInfo.setInteger(indexPath.row, forKey: "indexPath")
+    }
+    
+    func showAlertView() {
+        alertTopMargin.constant = alertMargin
+        view.endEditing(true)
+        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 10, options: .TransitionNone, animations: {
+            self.view.layoutIfNeeded()
+            self.maskView.alpha = 0.5
+            }, completion: nil)
+    }
+    func hiddenAlertView() {
+        alertTopMargin.constant = -100
+        view.endEditing(true)
+        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 10, options: .TransitionNone, animations: {
+            self.view.layoutIfNeeded()
+            self.maskView.alpha = 0
+            }, completion: nil)
+        moenyTF.becomeFirstResponder()
     }
     
     //MARK: - UITextFieldDelegate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        
         self.performSegueWithIdentifier("back", sender: nil)
         return true
     }
@@ -172,7 +227,6 @@ class AddBillViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         let array = DataHelper.shareDataHelper().queryAllModel()
@@ -187,12 +241,14 @@ class AddBillViewController: UIViewController, UICollectionViewDataSource, UICol
         
         let model = Model()
         model.id = "\(i)"
-        model.account = (accountButton.titleLabel?.text)! 
+        model.account = accountButton.titleLabel?.text
         model.type = type
-        model.money = moenyTF.text!
-        model.date = (timeButton.titleLabel?.text)! 
-        model.inAndOut = (inAndOutButton.titleLabel?.text)! 
-        DataHelper.shareDataHelper().insertModel(model)
+        model.money = moenyTF.text
+        model.date = timeButton.titleLabel?.text
+        model.inAndOut = inAndOutButton.titleLabel?.text
+        if moenyTF.text != "" {
+            DataHelper.shareDataHelper().insertModel(model)
+        }
     }
     
 

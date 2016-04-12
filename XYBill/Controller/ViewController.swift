@@ -14,9 +14,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var pan: UIPanGestureRecognizer!
     @IBOutlet weak var topMargin: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var XJLab: UILabel!
+    @IBOutlet weak var ZFBLab: UILabel!
+    @IBOutlet weak var YHKlab: UILabel!
+    @IBOutlet weak var remainMoneyLab: UILabel!
+    @IBOutlet weak var inMoneyLab: UILabel!
+    @IBOutlet weak var outMoneyLab: UILabel!
+    
     var dataArray: NSMutableArray!
-    var offsetY:CGFloat = 0
-    var model: Model!
+    var offsetY: CGFloat = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dataArray = NSMutableArray()
@@ -25,6 +32,46 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func readDataSource() {
         dataArray = DataHelper.shareDataHelper().queryAllModel()
+        var inMoney: CGFloat = 0
+        var outMoney: CGFloat = 0
+        var inYHKMoney: CGFloat = 0
+        var inZFBMoney: CGFloat = 0
+        var inXJMoney: CGFloat = 0
+        var outYHKMoney: CGFloat = 0
+        var outZFBMoney: CGFloat = 0
+        var outXJMoney: CGFloat = 0
+        for mod in dataArray {
+            let model = mod as! Model
+            if model.inAndOut == "收入" {
+                inMoney += CGFloat((model.money as NSString).floatValue)
+                if model.account == "银行卡" {
+                    inYHKMoney += CGFloat((model.money as NSString).floatValue)
+                }else if(model.account == "支付宝"){
+                    inZFBMoney += CGFloat((model.money as NSString).floatValue)
+                }else{
+                    inXJMoney += CGFloat((model.money as NSString).floatValue)
+                }
+            }else{
+                outMoney += CGFloat((model.money as NSString).floatValue)
+                if model.account == "银行卡" {
+                    outYHKMoney += CGFloat((model.money as NSString).floatValue)
+                }else if(model.account == "支付宝"){
+                    outZFBMoney += CGFloat((model.money as NSString).floatValue)
+                }else{
+                    outXJMoney += CGFloat((model.money as NSString).floatValue)
+                }
+            }
+        }
+        
+        inMoneyLab.text = "\(inMoney)"
+        outMoneyLab.text = "\(outMoney)"
+        remainMoneyLab.text = "\(inMoney - outMoney)"
+        
+        YHKlab.text = "\(inYHKMoney - outYHKMoney)"
+        ZFBLab.text = "\(inZFBMoney - outZFBMoney)"
+        XJLab.text = "\(inXJMoney - outXJMoney)"
+        
+        tableView.reloadData()
     }
     
     @IBAction func panAction(sender: UIPanGestureRecognizer) {
@@ -55,8 +102,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Dispose of any resources that can be recreated.
     }
     @IBAction func unwindToViewController(sender: UIStoryboardSegue){
-        dataArray = DataHelper.shareDataHelper().queryAllModel()
-        tableView.reloadData()
+        readDataSource()
+        
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -65,9 +112,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return dataArray.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCellWithIdentifier("ListCell", forIndexPath: indexPath) as! ListCell
         let model = dataArray[indexPath.row] as! Model
-        cell.textLabel?.text = "\(model.inAndOut)   \(model.date)   \(model.type)   \(model.money)   \(model.account)"
+        cell.titleLab.text = "\(model.inAndOut)   \(model.date)   \(model.type)   \(model.money)   \(model.account)"
         return cell
     }
     
@@ -77,7 +124,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         if scrollView.contentOffset.y > 0 && offsetY < scrollView.contentOffset.y {
             self.topMargin.constant = 0
-
         }
         UIView.animateWithDuration(0.3) { () -> Void in
             self.view.layoutIfNeeded()

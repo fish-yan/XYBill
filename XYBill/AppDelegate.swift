@@ -12,16 +12,19 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var userInfo: NSUserDefaults!
-    var dataArray:NSMutableArray!
+    
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         print(NSHomeDirectory())
+
         DataHelper.shareDataHelper().creatModelList()
-        userInfo = NSUserDefaults.standardUserDefaults()
-        dataArray = NSMutableArray()
-        dataArray = ["吃饭", "购物", "住房", "生活", "零食", "娱乐", "旅游"]
-        userInfo.setObject(dataArray, forKey: "userInfo")
+        let userInfo = NSUserDefaults.standardUserDefaults()
+        if userInfo.objectForKey("userInfo") == nil {
+            var dataArray = NSMutableArray()
+            dataArray = ["吃饭", "购物", "住房", "生活", "零食", "娱乐", "旅游"]
+            userInfo.setObject(dataArray, forKey: "userInfo")
+        }
+        
         // Override point for customization after application launch.
         return true
     }
