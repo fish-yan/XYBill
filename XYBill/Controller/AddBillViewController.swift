@@ -206,6 +206,7 @@ class AddBillViewController: UIViewController, UICollectionViewDataSource, UICol
             self.maskView.alpha = 0.5
             }, completion: nil)
     }
+    
     func hiddenAlertView() {
         alertTopMargin.constant = -100
         view.endEditing(true)
